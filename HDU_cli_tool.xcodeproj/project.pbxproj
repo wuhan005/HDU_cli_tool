@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1BA01D3F222946AC002B2811 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 1BA01D3E222946AC002B2811 /* main.c */; };
+		1BBFFE1C2229665B00EAE2E5 /* function.c in Sources */ = {isa = PBXBuildFile; fileRef = 1BBFFE1B2229665B00EAE2E5 /* function.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		1BA01D3B222946AC002B2811 /* HDU_cli_tool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HDU_cli_tool; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA01D3E222946AC002B2811 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		1BBFFE1A2229665B00EAE2E5 /* function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = function.h; sourceTree = "<group>"; };
+		1BBFFE1B2229665B00EAE2E5 /* function.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = function.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				1BA01D3E222946AC002B2811 /* main.c */,
+				1BBFFE1A2229665B00EAE2E5 /* function.h */,
+				1BBFFE1B2229665B00EAE2E5 /* function.c */,
 			);
 			path = HDU_cli_tool;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BA01D3F222946AC002B2811 /* main.c in Sources */,
+				1BBFFE1C2229665B00EAE2E5 /* function.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
