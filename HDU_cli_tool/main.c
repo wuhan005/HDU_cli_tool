@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <getopt.h>
 
 #include "function.h"
 
@@ -45,11 +46,11 @@ void timeSchedule(char* text){
     int nowIndex = 0;   //当前所在的事件的索引
     int remainMinute = 0;
     char remainMinuteString[10] = "";
-    char timeStatus[200] = "\n现在是";
+    char timeStatus[200] = "\n 现在是";
     
     //休息时间
     if((time.num.hour > 20 || time.num.hour < 8) || (time.num.hour == 20 && time.num.minute > 55) || (time.num.hour == 8 && time.num.minute < 5)){
-        strcpy(timeStatus, "\n现在是休息时间。");
+        strcpy(timeStatus, "\n 现在是休息时间。");
     }else{
         //int passMinutes = (time.num.hour - 8) * 60 + time.num.minute;
         int passMinutes =(10-8) * 60 +40;
@@ -81,13 +82,44 @@ void timeSchedule(char* text){
     strcpy(text, result);
 }
 
-//TODO:时间格式化函数
 
 
 int main(int argc, const char * argv[]) {
-    char times[200] = "";
-    timeSchedule(times);
-    printf("%s", times);
+    char result[200];
+    
+    int ch;
+    int option_index = 0;
+    char* options = "htc";
+    
+    static struct option long_options[] ={
+        {"help", no_argument, NULL, 'h'},
+        {"time", no_argument, NULL, 't'},
+        {"class", no_argument, NULL, 'c'},
+
+        {NULL, 0, NULL, 0},
+    };
+    
+    while ((ch = getopt_long(argc, argv, options, long_options, &option_index)) != -1) {
+        switch (ch) {
+            case 'h':
+                printf("help here");
+                break;
+            case 't':
+                timeSchedule(result);
+                printf("\n\033[01;32m %s \033[0m\n\n", result);
+                break;
+            case 'c':
+
+                break;
+            case 0:
+                printf("\n\033[01;32m Type `hdu -h` or `hdu --help` to get help. \033[0m\n\n");
+                break;
+            default:
+                printf("\n\033[01;32m Type `hdu -h` or `hdu --help` to get help. \033[0m\n\n");
+                return 0;
+        }
+    }
+    
     return 0;
 }
 
