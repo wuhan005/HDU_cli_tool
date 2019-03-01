@@ -41,7 +41,7 @@ Time now(){
 
 //格式化时间
 void formartTime(char* formartString){
-    char result[1000] = "";
+    char result[100] = "";
     Time time = now();
     
     //若超出最大空间，则返回默认值

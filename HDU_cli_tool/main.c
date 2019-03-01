@@ -13,40 +13,81 @@
 #include "function.h"
 
 //获取当前时间安排
-char* timeSchedule(){
+void timeSchedule(char* text){
+    char result[100] = "";
     
-    char** className = {"预备铃", "第一节", "第二节", "第三节", "第四节", "第五节", "预备铃", "第六节", "第七节", "第八节", "第九节", "预备铃", "第十节", "第十一节", "第十二节"};
-    int** classTime = {
-        {0, 0, 0, 0},
-        {8, 5, 8, 50},      //1
-        {8, 55, 9, 40},     //2
-        {10, 0, 10, 45},    //3
-        {10, 50, 11, 35},   //4
-        {11, 40, 12, 25},   //5
-        {12, 25, 13, 30},
-        {13, 30, 14, 15},   //6
-        {14, 20, 15, 05},   //7
-        {15, 15, 16, 00},   //8
-        {16, 05, 16, 50},   //9
-        {16, 50, 18, 30},
-        {18, 30, 19, 15},   //10
-        {19, 20, 20, 05},   //11
-        {20, 10, 20, 55},   //12
+    char className[25][25] = {
+        "准备上课",
+        "第一节课", "第一节课课间",
+        "第二节课", "第二节课课间",
+        "第三节课", "第三节课课间",
+        "第四节课", "第四节课课间",
+        "第五节课", "中午休息",
+        "第六节课", "第六节课课间",
+        "第七节课", "第七节课课间",
+        "第八节课", "第八节课课间",
+        "第九节课", "下午休息",
+        "第十节课", "第十节课课间",
+        "第十一节课", "第十一节课课间",
+        "第十二节课", "休息时间",
     };
     
-    Time timer = now();
+    //从8:00开始算起
+    int classTime[23] =   {5, 45, 5, 45, 20, 45, 5, 45, 5, 45, 65, 45, 5, 45, 10, 45, 5, 45, 100, 45, 5, 45, 5, 45};
+
+    //时间
+    char nowTime[50] = "Y-M-D h:m:s";
+    formartTime(nowTime);
+    strcat(result, nowTime);
     
-    char* result = "";
-    //strcat(result, timer.str.now);
     
-    return result;
+    Time time = now();
+    int nowIndex = 0;   //当前所在的事件的索引
+    int remainMinute = 0;
+    char remainMinuteString[10] = "";
+    char timeStatus[200] = "\n现在是";
+    
+    //休息时间
+    if((time.num.hour > 20 || time.num.hour < 8) || (time.num.hour == 20 && time.num.minute > 55) || (time.num.hour == 8 && time.num.minute < 5)){
+        strcpy(timeStatus, "\n现在是休息时间。");
+    }else{
+        //int passMinutes = (time.num.hour - 8) * 60 + time.num.minute;
+        int passMinutes =(10-8) * 60 +40;
+        int sumMinutes = 5;
+
+        //正常时间
+        for(int i = 1; i < 24; i++){
+            if(sumMinutes > passMinutes){
+                nowIndex = i - 1;
+                remainMinute = sumMinutes - passMinutes;    //距离下一个事件的剩余时间
+                break;
+            }else{
+                sumMinutes += classTime[i];
+                nowIndex++;
+            }
+        }
+        
+        strcat(timeStatus, className[nowIndex]);
+        strcat(timeStatus, "，距离 ");
+        strcat(timeStatus, className[nowIndex + 1]);
+        strcat(timeStatus, " 还有 ");
+        sprintf(remainMinuteString, "%d",remainMinute);
+        strcat(timeStatus, remainMinuteString);
+        strcat(timeStatus, " 分钟。");
+    }
+
+    strcat(result, timeStatus);
+    
+    strcpy(text, result);
 }
 
 //TODO:时间格式化函数
 
 
 int main(int argc, const char * argv[]) {
-
+    char times[200] = "";
+    timeSchedule(times);
+    printf("%s", times);
     return 0;
 }
 
