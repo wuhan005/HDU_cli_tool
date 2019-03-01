@@ -34,6 +34,9 @@ typedef struct Time{
     
 }Time;
 
+
+
 Time now();
+void formartTime(char*);
 
 #endif /* function_h */

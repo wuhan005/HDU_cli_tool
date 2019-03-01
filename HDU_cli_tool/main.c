@@ -34,8 +34,10 @@ char* timeSchedule(){
         {20, 10, 20, 55},   //12
     };
     
+    Time timer = now();
     
     char* result = "";
+    //strcat(result, timer.str.now);
     
     return result;
 }
@@ -44,8 +46,7 @@ char* timeSchedule(){
 
 
 int main(int argc, const char * argv[]) {
-    
-    
+
     return 0;
 }
 
